@@ -5,7 +5,7 @@ export function Logo() {
   return (
     <Link href="/" className="inline-block rounded bg-white px-3 py-1.5">
       <Image
-        src="/intermission.png"
+        src="/phpcon-odawara-2026/fv01.png"
         alt="EMTEC Intermission"
         width={200}
         height={50}
@@ -38,26 +38,8 @@ export function Footer() {
     <footer className="border-t border-neutral-800 px-8 py-6">
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         <p className="text-sm text-neutral-500">
-          &copy; {new Date().getFullYear()} EMTEC
+          &copy; {new Date().getFullYear()} EMTEC. Forked by @dero1to
         </p>
-        <div className="flex gap-6">
-          <a
-            href="https://github.com/cloudnativedaysjp/emtec-intermission"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-neutral-400 hover:text-white transition-colors"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://emtec.tv/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-neutral-400 hover:text-white transition-colors"
-          >
-            EMTEC
-          </a>
-        </div>
       </div>
     </footer>
   )

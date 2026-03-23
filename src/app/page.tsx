@@ -7,17 +7,6 @@ import { talks } from '@/data/talks'
 
 const TOOLS = [
   {
-    href: '/break-dk/monitor',
-    title: 'Monitor',
-    description: '全トラックの状態を監視 (Dreamkast専用)',
-  },
-  {
-    href: 'https://short.emtec.tv/',
-    title: '短縮URL',
-    description: 'EMTEC専用短縮URLサービス',
-    external: true,
-  },
-  {
     href: '/tools/pdf',
     title: 'PDF変換ツール',
     description: 'PDFファイルを画像に変換するツール',
@@ -135,14 +124,14 @@ export default function Home() {
       <main className="flex flex-1 flex-col p-12">
         <div className="mx-auto flex w-full max-w-5xl flex-1 items-start gap-8">
           <div className="flex w-3/4 flex-col gap-12">
-            <Section
+            {/* <Section
               title="Dreamkast API"
               badge={dkEventAbbr}
               description="Dreamkast APIからトーク情報を取得"
             >
               <LinkCard href="/break-dk/menu/1" title="Day 1" />
               <LinkCard href="/break-dk/menu/2" title="Day 2" />
-            </Section>
+            </Section> */}
 
             {staticDays.length > 0 && (
               <Section
