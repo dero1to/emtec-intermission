@@ -80,12 +80,12 @@ function Main({ view, isDk }: Props) {
           </div>
           <div className="basis-3/4 h-[470px] px-11 flex flex-col items-start justify-center">
             <div className="basis-3/5 flex items-end justify-start text-2xl font-bold text-[#333333] break-words">
-              <p className='mb-7'>{talk.title}</p>
+              <p className="mb-7">{talk.title}</p>
             </div>
             <div className="basis-2/5 flex items-start justify-start">
               <div className="mt-7 flex items-center justify-start gap-4">
                 <Image
-                  className='rounded-full'
+                  className="rounded-full"
                   src={speakers[0]?.avatarUrl || '/phpcon_odawara/naruto.png'}
                   alt={speakers[0]?.name || 'default avatar'}
                   width={75}
@@ -94,7 +94,7 @@ function Main({ view, isDk }: Props) {
                 <div className="text-[#333333] text-xl font-bold">
                   {talk.speakers[0]?.name}
                 </div>
-                <div className='text-[#333333] text-lg font-bold'>
+                <div className="text-[#333333] text-lg font-bold">
                   @phpcon_odawara
                 </div>
               </div>
