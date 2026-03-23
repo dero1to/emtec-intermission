@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import config from '@/config'
 import { getTimeStr } from '@/utils/time'
 import { trim } from '@/utils/utils'
+import Image from 'next/image'
 
 type Props = { view: Optional<TalkView>; isDk: boolean }
 
@@ -23,53 +24,41 @@ export default function Header({ view, isDk }: Props) {
     return <div>No eventAbbr configured.</div>
   }
   return (
-    <div className="flex flex-row items-center h-[140px] text-white font-din-2014 font-bold">
-      <div className="pl-30 basis-3/12 ">
-        <div className="text-base  text-center opacity-75 font-ryo-gothic-plusn">
-          トラック
-        </div>
-        <div className="text-4xl  text-center font-video-cond">
-          {view.selectedTrack.name}
-        </div>
+    <div className="flex flex-row items-center h-[190px] text-[#333333] font-din-2014 font-bold">
+      <div className="basis-1/3 flex items-center justify-start">
+        <Image
+          src="/phpcon_odawara/fv01.png"
+          alt="logo"
+          width={370}
+          height={130}
+        />
       </div>
 
-      <div className=" basis-2/12 ">
-        <div className="text-base  text-left opacity-75 font-ryo-gothic-plusn">
-          ハッシュタグ
-        </div>
-        <div className="text-2xl text-left font-din-2014">
-          {view.selectedTrack.hashTag ? (
-            <>
-              #{eventAbbrToShow.toUpperCase()}
-              <br />#{view.selectedTrack.hashTag.toUpperCase()}
-            </>
-          ) : (
-            <>
-              {/* #{eventAbbrToShow.toUpperCase()}_{view.selectedTrack.name} */}
-              #{eventAbbrToShow.toUpperCase()}
-            </>
-          )}
-        </div>
-      </div>
-      <div className="basis-1/4">
-        <div className="text-lg text-center font-din-2014 opacity-75">
-          {eventAbbrToShow.toUpperCase()}
-        </div>
-        <div className="text-5xl text-center font-video-cond">
+      <div className="basis-1/3 flex items-center justify-center">
+        <div className="px-5 py-2 bg-red-200 rounded-full text-5xl text-center">
           {now.format('HH:mm:ss')}
         </div>
       </div>
-      <div className="basis-1/12">
-        <div className="text-lg text-center opacity-75 font-video-cond">
-          NEXT
+
+      <div className="basis-1/3 flex items-end justify-center">
+        <div className="basis-1/2 flex items-end justify-center">
+          <div className="text-base text-center opacity-75">部屋</div>
+          <div className="text-4xl text-center">{view.selectedTrack.name}</div>
         </div>
-      </div>
-      <div className="basis-1/4 pr-4">
-        <div className="text-lg text-left">
-          {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
-        </div>
-        <div className="text-base text-left mt-2 font-ryo-gothic-plusn line-clamp-3">
-          {trim(talk.title, 80)}
+        <div className="basis-1/2 flex items-end justify-start">
+          <div className="text-2xl text-left">
+            {view.selectedTrack.hashTag ? (
+              <>
+                #{eventAbbrToShow}
+                <br />#{view.selectedTrack.hashTag}
+              </>
+            ) : (
+              <>
+                #{eventAbbrToShow}_{view.selectedTrack.name}
+                <br />#{eventAbbrToShow}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

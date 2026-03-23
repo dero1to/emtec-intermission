@@ -8,6 +8,7 @@ import { trim } from '@/utils/utils'
 import PageHeader from './PageHeader'
 import { Speaker } from '@/data/types'
 import { pushPageMeasurement, pushPageEvent } from '@/lib/faro'
+import Image from 'next/image'
 
 type PageProps = { view: Optional<TalkView>; isDk: boolean }
 type Props = { view: Optional<TalkView>; isDk?: boolean }
@@ -29,7 +30,7 @@ export default function Page({ view, isDk }: PageProps) {
   }, [goNextPage])
 
   return (
-    <div>
+    <div className="m-auto w-[90%]">
       <PageHeader view={view} isDk={isDk} />
       <div className="h-full">
         <div className="flex flex-row h-full">
@@ -56,40 +57,24 @@ function Main({ view, isDk }: Props) {
   const speakers = view.speakersOf(talk.id)
 
   return (
-    <div className="mt-4 mb-16">
-      <div className="text-left w-[500px] bg-COLOR-UPCOMING-SESSION-LABEL pr-3 py-10">
-        <div className="text-right text-white font-bold font-din-2014 tracking-wide text-2xl">
-          UPCOMING SESSION
+    <div className="text-[#333333] mt-[50px] ms-6">
+      <div>
+        <div className="text-left font-bold font-din-2014 tracking-wide text-2xl">
+          NEXT SESSION {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
         </div>
       </div>
-      <div className="top-[55px] left-[120px] w-[1000px] relative longshadow bg-[rgba(18,151,204)] text-white">
-        <div className="text-center py-2 text-1.5xl text-white bg-slate-400 font-din-2014 font-light">
-          {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
-        </div>
-        <div className="px-12 py-6 w-full font-ryo-gothic-plusn">
-          <div className="text-center text-3xl pt-4 font-bold break-words">
-            {talk.title}
+      <div className="mt-[30px] w-[1040px] h-[590px] flex items-center justify-center border border-gray-300 rounded-2xl">
+        <div className="w-[920px] h-[470px] rounded-3xl bg-slate-500 opacity-50 flex items-center justify-center">
+          <div className="basis-1/4 ps-12">
+            <Image
+              src="/phpcon_odawara/naruto.png"
+              alt="naruto"
+              width={180}
+              height={180}
+            />
           </div>
-        </div>
-        <SpeakerCards speakers={speakers} />
-        <div className="p-6 font-ryo-gothic-plusn text-white">
-          {(talk.talkCategory || talk.talkDifficulty) && (
-            <div className="text-base text-gray-300 pb-2">
-              {talk.talkCategory && (
-                <span className="mr-5">Category: {talk.talkCategory}</span>
-              )}
-              {talk.talkDifficulty && (
-                <span className="mr-5">Difficulty: {talk.talkDifficulty}</span>
-              )}
-            </div>
-          )}
-          <div className="text-base text-white">
-            {talk.abstract && (
-              <span>
-                {isDk && 'Abstract: '}
-                {trim(talk.abstract, 200)}
-              </span>
-            )}
+          <div className="basis-3/4 text-center text-white font-ryo-gothic-plusn font-bold text-3xl">
+            {trim(talk.title, 40)}
           </div>
         </div>
       </div>
@@ -120,45 +105,23 @@ function Side({ view }: Props) {
     .talksInSameTrack()
     .filter((t) => t.talkCategory === 'Keynote' && t.startTime > talkStartTime)
   return (
-    <div className="p-14 h-[80%]">
-      {hasKeynote && (
-        <div className="text-right w-[650px] backdrop-blur-xl bg-white/15 border border-white/30 px-4 pt-2 pb-3 my-3 font-ryo-gothic-plusn rounded-xl shadow-lg">
-          <div className="flex flex-row">
-            <div className="text-left basis-1/2 text-white text-sm font-din-2014 font-light">
-              <span>
-                {getTimeStr(keyNoteTalks[0].startTime)} -{' '}
-                {getTimeStr(keyNoteTalks[keyNoteTalks.length - 1].endTime)} :
-              </span>
-              <span className="ml-2">Keynote</span>
-            </div>
-            <div className="basis-1/2 text-white text-sm" />
-          </div>
-          {keyNoteTalks.map((talk) => (
-            <div
-              key={talk.id}
-              className="text-center text-white text-lg min-h-[40px] py-1 font-bold"
-            >
-              {trim(talk.title, 80)}
-            </div>
-          ))}
-        </div>
-      )}
-
+    <div className="ps-[30px] pt-[115px] flex flex-col items-center">
       {talks.map((talk) => (
         <div
           key={talk.id}
-          className="text-right w-[650px] backdrop-blur-xl bg-white/15 border border-white/30 px-4 pt-3 pb-2 my-3 font-ryo-gothic-plusn rounded-xl shadow-lg"
+          className="text-right w-[580px] h-[130px] backdrop-blur-xl bg-white px-4 pt-3 pb-2 my-3 rounded-xl shadow-lg"
         >
           <div className="flex flex-row">
-            <div className="text-left basis-1/2 text-white text-sm font-din-2014 font-light">
+            <div className="text-left basis-1/2 text-[#333333] text-sm font-bold">
               {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
             </div>
-            <div className="basis-1/2 text-white text-sm">
-              {talk.speakers.map((t) => t.name).join(', ')}
+            <div className="basis-1/2 text-[#333333] text-sm">
+              {/* {talk.speakers.map((t) => t.name).join(', ')} */}
+              {talk.speakers[0]?.name}
             </div>
           </div>
-          <div className="text-center text-white text-lg min-h-[70px] py-2 font-bold">
-            {trim(talk.title, 80)}
+          <div className="text-center text-[#333333] text-base min-h-[70px] py-2 font-bold">
+            {trim(talk.title, 45)}
           </div>
         </div>
       ))}
