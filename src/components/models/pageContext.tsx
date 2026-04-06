@@ -17,6 +17,7 @@ type PageCtxType = {
   current: number
   totalPage: number
   goNextPage: () => void
+  resetPage: () => void
   setTotalPage: (totalPage: number) => void
   now: Dayjs
   hasTimeDrift: boolean
@@ -26,6 +27,7 @@ export const PageCtx = createContext<PageCtxType>({
   current: 0,
   totalPage: 0,
   goNextPage: () => {},
+  resetPage: () => {},
   setTotalPage: () => {},
   now: now(),
   hasTimeDrift: false,
@@ -40,6 +42,10 @@ export const PageCtxProvider = (props: PropsWithChildren) => {
   const goNextPage = useCallback(() => {
     setCurrent((current + 1) % totalPage)
   }, [current, setCurrent, totalPage])
+
+  const resetPage = useCallback(() => {
+    setCurrent(0)
+  }, [])
 
   useEffect(() => {
     // Start time synchronization process (5-second retries for 30 seconds)
@@ -66,6 +72,7 @@ export const PageCtxProvider = (props: PropsWithChildren) => {
     current,
     totalPage,
     goNextPage,
+    resetPage,
     setTotalPage,
     now: currentTime,
     hasTimeDrift: timeDrift,

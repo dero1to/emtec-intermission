@@ -28,7 +28,7 @@ function Pages() {
     extendConfig(router.query as Record<string, string>)
   }, [router.query])
 
-  const { current, setTotalPage, goNextPage } = useContext(PageCtx)
+  const { current, setTotalPage, goNextPage, resetPage } = useContext(PageCtx)
 
   const view = useMemo(() => {
     if (!talkId) {
@@ -64,10 +64,11 @@ function Pages() {
     setTotalPage(pages.length)
   }, [moviePlayed]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Page4再生完了後にフラグを立てる
+  // Page4再生完了後にフラグを立て、currentを0(=Page1)にリセット
   useEffect(() => {
     if (hasMovie && !moviePlayed && pages[current]?.name !== 'Page4') {
       setMoviePlayed(true)
+      resetPage()
     }
   }, [current]) // eslint-disable-line react-hooks/exhaustive-deps
 
