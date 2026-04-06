@@ -3,7 +3,7 @@
 const nextConfig = {
   optimizeFonts: false,
   images: {
-    domains: ['www.janog.gr.jp'],
+    domains: ['www.janog.gr.jp', 'fortee.jp'],
   },
 }
 

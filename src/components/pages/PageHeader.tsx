@@ -3,8 +3,8 @@ import { TalkView } from '../models/talkView'
 import { PageCtx } from '../models/pageContext'
 import { useContext } from 'react'
 import config from '@/config'
-import { getTimeStr } from '@/utils/time'
-import { trim } from '@/utils/utils'
+// import { getTimeStr } from '@/utils/time'
+// import { trim } from '@/utils/utils'
 import Image from 'next/image'
 
 type Props = { view: Optional<TalkView>; isDk: boolean }

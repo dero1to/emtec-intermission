@@ -1,14 +1,14 @@
 import { Optional } from '@/utils/types'
-import { TalkView } from '../models/talkView'
+import { TalkView } from '../../models/talkView'
 import { useContext, useEffect, useRef } from 'react'
-import { PageCtx } from '../models/pageContext'
+import { PageCtx } from '../../models/pageContext'
 import config from '@/config'
 import type { Speaker, Talk, Track } from '@/data/types'
-import PageHeader from './PageHeader'
+import PageHeader from '../PageHeader'
 import { getTime, getTimeStr } from '@/utils/time'
 import { pushPageMeasurement, pushPageEvent } from '@/lib/faro'
-import { useAvatarSlider } from '../hooks/useAvatarSlider'
-import { RollingAvatar } from '../avatar/RollingAvatar'
+import { useAvatarSlider } from '../../hooks/useAvatarSlider'
+import { RollingAvatar } from '../../avatar/RollingAvatar'
 
 // 選択されたトークの時間帯に重なるトークを各トラックごとに取得
 function getOverlappingTalks(view: TalkView): Record<string, Talk> {

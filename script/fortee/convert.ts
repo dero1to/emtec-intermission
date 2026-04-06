@@ -9,42 +9,42 @@ import { forteeProposal, forteeTimetableItem } from './type.js'
 import { Track, Speaker, Talk } from '../../src/data/types.js'
 import { exportEventData } from '../common/utils.js'
 
-const EVENT_ALIAS: string = 'sre-kaigi-2026'
+const EVENT_ALIAS: string = 'phpconodawara-2026'
 
 const eventImageUrl: string = `https://fortee.jp/files/${EVENT_ALIAS}/image/avatar.jpg`
 
-const conferenceDays = [{ id: 1, date: '2026-01-31' }]
+const conferenceDays = [{ id: 1, date: '2026-04-11' }]
 
 // Track情報を生成する
 const tracks: Track[] = [
-  { id: 1, name: 'ホール', hashTag: 'HALL' },
-  { id: 2, name: 'ルーム A', hashTag: 'RoomA' },
-  { id: 3, name: 'ルーム B', hashTag: 'RoomB' },
+  { id: 1, name: 'かま', hashTag: 'kama' },
+  { id: 2, name: 'ぼこ', hashTag: 'boko' },
+  { id: 3, name: 'あじ', hashTag: 'aji' },
 ]
 
 // 手動で追加するトーク（最小限の情報）
 // IDは 9000番台を使用して自動生成されるIDと重複を避ける
 const manualTalks: Partial<Talk>[] = [
-  {
-    id: 9001,
-    trackId: 1,
-    title: '開会式',
-    abstract: '',
-    speakers: [{ id: 0, name: '運営' }],
-    startTime: '2026-01-31T10:00:00+09:00',
-    endTime: '2026-01-31T10:10:00+09:00',
-    conferenceDayId: 1,
-  },
-  {
-    id: 9002,
-    trackId: 1,
-    title: '閉会式',
-    abstract: '',
-    speakers: [{ id: 0, name: '運営' }],
-    startTime: '2026-01-31T17:50:00+09:00',
-    endTime: '2026-01-31T18:00:00+09:00',
-    conferenceDayId: 1,
-  },
+  // {
+  //   id: 9001,
+  //   trackId: 1,
+  //   title: '開会式',
+  //   abstract: '',
+  //   speakers: [{ id: 0, name: '運営' }],
+  //   startTime: '2026-01-31T10:00:00+09:00',
+  //   endTime: '2026-01-31T10:10:00+09:00',
+  //   conferenceDayId: 1,
+  // },
+  // {
+  //   id: 9002,
+  //   trackId: 1,
+  //   title: '閉会式',
+  //   abstract: '',
+  //   speakers: [{ id: 0, name: '運営' }],
+  //   startTime: '2026-01-31T17:50:00+09:00',
+  //   endTime: '2026-01-31T18:00:00+09:00',
+  //   conferenceDayId: 1,
+  // },
 ]
 
 /**

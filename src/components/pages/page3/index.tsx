@@ -1,9 +1,9 @@
 import { Optional } from '@/utils/types'
-import { TalkView } from '../models/talkView'
+import { TalkView } from '../../models/talkView'
 import { useContext, useEffect, useState, useRef } from 'react'
-import { PageCtx } from '../models/pageContext'
+import { PageCtx } from '../../models/pageContext'
 import config from '@/config'
-import PageHeader from './PageHeader'
+import PageHeader from '../PageHeader'
 import Image from 'next/image'
 import { pushPageMeasurement, pushPageEvent } from '@/lib/faro'
 
@@ -39,8 +39,8 @@ export default function Page({ view, isDk }: PageProps) {
       <Image
         src={`/${alias}/${images[count]}`}
         alt={'information'}
-        width={1670}
-        height={940}
+        width={1582}
+        height={890}
         className="m-auto"
       />
     </div>

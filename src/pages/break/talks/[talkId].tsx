@@ -1,8 +1,8 @@
 import AudioPlayer from '@/components/media/AudioPlayer'
-import Page1 from '@/components/pages/Page1'
-import Page2, { AvatarPreLoader } from '@/components/pages/Page2'
-import Page3 from '@/components/pages/Page3'
-import Page4 from '@/components/pages/Page4'
+import Page1 from '@/components/pages/page1/index'
+// import Page2, { AvatarPreLoader } from '@/components/pages/page2/index'
+import Page3 from '@/components/pages/page3/index'
+// import Page4 from '@/components/pages/page4/index'
 // import Loading from '@/components/common/Loading'
 import { PageCtx, PageCtxProvider } from '@/components/models/pageContext'
 import { TalkView } from '@/components/models/talkView'
@@ -43,9 +43,9 @@ function Pages() {
 
   const pages = [
     { name: 'Page1', component: <Page1 key={1} view={view} isDk={false} /> },
-    { name: 'Page2', component: <Page2 key={2} view={view} isDk={false} /> },
+    // { name: 'Page2', component: <Page2 key={2} view={view} isDk={false} /> },
     { name: 'Page3', component: <Page3 key={3} view={view} isDk={false} /> },
-    { name: 'Page4', component: <Page4 key={4} view={view} /> },
+    // { name: 'Page4', component: <Page4 key={4} view={view} /> },
   ]
   useEffect(() => {
     setTotalPage(pages.length)
@@ -95,9 +95,10 @@ function Pages() {
         </>
       )}
       <AudioPlayer src={audioSrc} shouldPlay={shouldPlayAudio} />
-      <AvatarPreLoader view={view}></AvatarPreLoader>
+      {/* <AvatarPreLoader view={view}></AvatarPreLoader> */}
       <div className="w-[1920px] h-[1080px] relative">
         <Image
+          // src="/phpcon_odawara/background-test.png"
           src="/phpcon_odawara/background.png"
           alt="background"
           className="-z-10"

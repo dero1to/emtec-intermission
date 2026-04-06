@@ -5,8 +5,8 @@ export function Logo() {
   return (
     <Link href="/" className="inline-block rounded bg-white px-3 py-1.5">
       <Image
-        src="/phpcon-odawara-2026/fv01.png"
-        alt="EMTEC Intermission"
+        src="/phpcon_odawara/fv01.png"
+        alt="Intermission"
         width={200}
         height={50}
         priority
