@@ -13,7 +13,7 @@ const playlist: Playlist = [
   {
     sources: [
       {
-        src: 'https://pub-ac15e822806e471884e2b63b26f353c6.r2.dev/srekaigi2026/makuai.mp4',
+        src: 'https://intermission.dero1to.live/output_compressed.mp4',
         type: 'video/mp4',
       },
     ],

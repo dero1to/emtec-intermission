@@ -2,8 +2,8 @@ import AudioPlayer from '@/components/media/AudioPlayer'
 import Page1 from '@/components/pages/page1/index'
 // import Page2, { AvatarPreLoader } from '@/components/pages/page2/index'
 // import Page3 from '@/components/pages/page3/index'
-// import Page4 from '@/components/pages/page4/index'
-// import Loading from '@/components/common/Loading'
+import Page4 from '@/components/pages/page4/index'
+import Loading from '@/components/common/Loading'
 import { PageCtx, PageCtxProvider } from '@/components/models/pageContext'
 import { TalkView } from '@/components/models/talkView'
 import config, { extendConfig } from '@/config'
@@ -11,7 +11,7 @@ import { speakers } from '@/data/speakers'
 import { talks } from '@/data/talks'
 import { tracks } from '@/data/tracks'
 import { useRouter } from 'next/router'
-import { useContext, useEffect, useMemo } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import Image from 'next/image'
 // import { useLoadingTransition } from '@/components/hooks/useLoadingTransition'
 
@@ -37,15 +37,23 @@ function Pages() {
     return TalkView.withoutDk(talkId as string, talks, tracks, speakers)
   }, [talkId])
 
-  // const { isLoading, showContent, isLogoFadingOut } = useLoadingTransition({
-  //   isDataReady: !!view,
-  // })
+  const [isLoading, setIsLoading] = useState(true)
+  const [isFadingOut, setIsFadingOut] = useState(false)
+
+  useEffect(() => {
+    const fadeTimer = setTimeout(() => setIsFadingOut(true), 4500)
+    const hideTimer = setTimeout(() => setIsLoading(false), 5000)
+    return () => {
+      clearTimeout(fadeTimer)
+      clearTimeout(hideTimer)
+    }
+  }, [])
 
   const pages = [
+    { name: 'Page4', component: <Page4 key={4} view={view} /> },
     { name: 'Page1', component: <Page1 key={1} view={view} isDk={false} /> },
     // { name: 'Page2', component: <Page2 key={2} view={view} isDk={false} /> },
     // { name: 'Page3', component: <Page3 key={3} view={view} isDk={false} /> },
-    // { name: 'Page4', component: <Page4 key={4} view={view} /> },
   ]
   useEffect(() => {
     setTotalPage(pages.length)
@@ -108,23 +116,20 @@ function Pages() {
           priority
         />
         {/* ローディング画面 */}
-        {/* {isLoading && (
+        {isLoading && (
           <div className="absolute inset-0 z-10">
             <Loading
-              isFadingOut={isLogoFadingOut}
-              logoPath="/o11yconjp2025/logo.svg"
+              isFadingOut={isFadingOut}
+              logoPath="/phpcon_odawara/naruto.png"
             />
           </div>
-        )} */}
+        )}
         {/* コンテンツ */}
-        {/* {showContent && (
+        {!isLoading && (
           <div className="absolute inset-0 content-fade-in">
-            {pages[current]}
+            {pages[current].component}
           </div>
-        )} */}
-        {/* {!isLoading && !showContent && ( */}
-        <div className="absolute inset-0">{pages[current].component}</div>
-        {/* )} */}
+        )}
       </div>
     </>
   )

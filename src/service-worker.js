@@ -6,6 +6,7 @@ precacheAndRoute(self.__WB_MANIFEST)
 const CACHE_NAME = 'video-cache'
 const VIDEO_URL = [
   // 'https://pub-ac15e822806e471884e2b63b26f353c6.r2.dev/srekaigi2026/makuai.mp4',
+  'https://intermission.dero1to.live/output_compressed.mp4',
 ]
 
 async function updateCache() {

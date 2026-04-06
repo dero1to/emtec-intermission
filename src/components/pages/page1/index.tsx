@@ -19,11 +19,11 @@ export default function Page({ view, isDk }: PageProps) {
     pushPageMeasurement('Page1', duration)
     pushPageEvent('Page1', 'page_displayed')
 
-    const cancel = setTimeout(() => {
-      pushPageEvent('Page1', 'page_exit')
-      goNextPage()
-    }, config.transTimePage1 * 1000)
-    return () => clearTimeout(cancel)
+    // const cancel = setTimeout(() => {
+    //   pushPageEvent('Page1', 'page_exit')
+    //   goNextPage()
+    // }, config.transTimePage1 * 1000)
+    // return () => clearTimeout(cancel)
   }, [goNextPage])
 
   return (
