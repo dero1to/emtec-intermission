@@ -11,7 +11,7 @@ import { exportEventData } from '../common/utils.js'
 
 const EVENT_ALIAS: string = 'phpconodawara-2026'
 
-const eventImageUrl: string = `https://fortee.jp/files/${EVENT_ALIAS}/image/avatar.jpg`
+const eventImageUrl: string = `https://fortee.jp/files/${EVENT_ALIAS}/image/avatar.png`
 
 const conferenceDays = [{ id: 1, date: '2026-04-11' }]
 
@@ -60,6 +60,7 @@ async function main() {
     {
       id: 0,
       name: '運営',
+      twitter: 'phpcon_odawara',
       avatarUrl: eventImageUrl,
     },
     ...convertToSpeakers(dataTalks),
@@ -119,6 +120,7 @@ function convertToSpeakers(
       speakers.push({
         id: index + 1,
         name: talk.speaker.name,
+        twitter: talk.speaker.twitter,
         avatarUrl: talk.speaker.avatar_url || DEFAULT_IMAGE_PATH,
       } as Speaker)
     }

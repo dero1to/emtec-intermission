@@ -25,5 +25,6 @@ export type Speaker = {
   id: number
   name: string
   company?: (string | null) | undefined
+  twitter?: (string | null) | undefined
   avatarUrl?: (string | null) | undefined
 }
