@@ -147,7 +147,14 @@ function TalkMenuItem({ talk }: { talk: Optional<Talk> }) {
         query,
       }}
     >
-      <div className="mb-1 text-[10px] text-neutral-500">#{talk.id}</div>
+      <div className="mb-1 flex items-center gap-1.5">
+        <span className="text-[10px] text-neutral-500">#{talk.id}</span>
+        {talk.isMovieSkip && (
+          <span className="inline-block px-1.5 py-0.5 text-[9px] font-medium bg-yellow-600/20 text-yellow-400 rounded">
+            CM Skip
+          </span>
+        )}
+      </div>
       <div className="mb-1 text-xs font-medium leading-tight text-white group-hover:text-blue-300 transition-colors">
         {talk.title}
       </div>
