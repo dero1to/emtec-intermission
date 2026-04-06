@@ -1,6 +1,7 @@
 import { Optional } from '@/utils/types'
 import { TalkView } from '../../models/talkView'
 import { getTimeStr } from '@/utils/time'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
 type Props = { view: Optional<TalkView>; isDk?: boolean }
@@ -14,6 +15,26 @@ export function Main({ view, isDk: _isDk }: Props) {
     return <></>
   }
   const speakers = view.speakersOf(talk.id)
+  const wrapRef = useRef<HTMLDivElement>(null)
+  const [isWrapped, setIsWrapped] = useState(false)
+
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+    // 画像75px + gap16px = 91px。高さがそれを超えたら回り込みが発生
+    setIsWrapped(el.scrollHeight > 91)
+  }, [talk, speakers])
+  const titleLen = talk.title.length
+  const titleSize = (() => {
+    switch (true) {
+      case titleLen <= 15:
+        return 'text-4xl'
+      case titleLen <= 60:
+        return 'text-3xl'
+      default:
+        return 'text-2xl'
+    }
+  })()
 
   return (
     <div className="text-[#333333] mt-[50px] ms-6">
@@ -32,14 +53,19 @@ export function Main({ view, isDk: _isDk }: Props) {
               height={180}
             />
           </div>
-          <div className="basis-3/4 h-[470px] px-11 flex flex-col items-start justify-center">
-            <div className="basis-3/5 flex items-end justify-start text-2xl font-bold text-[#333333] break-words">
-              <p className="mb-7 whitespace-pre-line">{talk.title}</p>
+          <div className="basis-3/4 h-[470px] flex flex-col items-start justify-center">
+            <div
+              className={`basis-3/5 flex items-center justify-start ${titleSize} font-bold text-[#333333] break-words w-full ps-11 pe-2 pt-[10%]`}
+            >
+              <p className="whitespace-pre-line">{talk.title}</p>
             </div>
-            <div className="basis-2/5 flex items-start justify-start">
-              <div className="mt-7 flex items-center justify-start gap-4">
+            <div className="basis-2/5 flex items-start justify-start w-full ps-11 pe-2 pt-7">
+              <div
+                ref={wrapRef}
+                className="flex flex-wrap items-center gap-x-4"
+              >
                 <Image
-                  className="rounded-full"
+                  className="rounded-full shrink-0"
                   src={speakers[0]?.avatarUrl || '/phpcon_odawara/naruto.png'}
                   alt={speakers[0]?.name || 'default avatar'}
                   width={75}
@@ -48,9 +74,13 @@ export function Main({ view, isDk: _isDk }: Props) {
                 <div className="text-[#333333] text-xl font-bold">
                   {talk.speakers[0]?.name}
                 </div>
-                <div className="text-[#333333] text-lg font-bold">
-                  {speakers[0]?.twitter && `@${speakers[0].twitter}`}
-                </div>
+                {speakers[0]?.twitter && (
+                  <div
+                    className={`text-[#5C5C5C] text-xl font-bold ${isWrapped ? 'w-full ps-[94px]' : ''}`}
+                  >
+                    @{speakers[0].twitter}
+                  </div>
+                )}
               </div>
             </div>
           </div>
