@@ -7,16 +7,11 @@ import Image from 'next/image'
 type Props = { view: Optional<TalkView>; isDk?: boolean }
 
 export function Main({ view, isDk: _isDk }: Props) {
-  if (!view) {
-    return <></>
-  }
-  const talk = view.talksLeftInSameTrack()[0]
-  if (!talk) {
-    return <></>
-  }
-  const speakers = view.speakersOf(talk.id)
   const wrapRef = useRef<HTMLDivElement>(null)
   const [isWrapped, setIsWrapped] = useState(false)
+
+  const talk = view?.talksLeftInSameTrack()[0]
+  const speakers = talk ? view?.speakersOf(talk.id) : []
 
   useEffect(() => {
     const el = wrapRef.current
@@ -24,6 +19,10 @@ export function Main({ view, isDk: _isDk }: Props) {
     // 画像75px + gap16px = 91px。高さがそれを超えたら回り込みが発生
     setIsWrapped(el.scrollHeight > 91)
   }, [talk, speakers])
+
+  if (!view || !talk) {
+    return <></>
+  }
   const titleLen = talk.title.length
   const titleSize = (() => {
     switch (true) {
@@ -43,7 +42,7 @@ export function Main({ view, isDk: _isDk }: Props) {
   return (
     <div className="text-[#333333] mt-[50px] ms-6">
       <div>
-        <div className="text-left font-bold font-sen tracking-wide text-3xl">
+        <div className="text-left font-bold font-sen tracking-wide text-2.5xl">
           <span className="text-3.5xl">NEXT SESSION</span>　
           {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
         </div>
