@@ -3,6 +3,12 @@ import { TalkView } from '../../models/talkView'
 import { getTimeStr } from '@/utils/time'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import { Noto_Sans_JP } from 'next/font/google'
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+})
 
 type Props = { view: Optional<TalkView>; isDk?: boolean }
 
@@ -59,7 +65,7 @@ export function Main({ view, isDk: _isDk }: Props) {
           </div>
           <div className="basis-3/4 h-[470px] flex flex-col items-start justify-center">
             <div
-              className={`basis-3/5 flex items-center justify-start ${titleSize} font-bold text-[#333333] break-words w-full ps-11 pe-2 pt-[10%]`}
+              className={`basis-3/5 flex items-center justify-start ${titleSize} font-bold ${notoSansJP.className} text-[#333333] break-words w-full ps-11 pe-2 pt-[10%]`}
             >
               <p className="whitespace-pre-line">{talk.title}</p>
             </div>
@@ -75,12 +81,12 @@ export function Main({ view, isDk: _isDk }: Props) {
                   width={75}
                   height={75}
                 />
-                <div className="text-[#333333] text-xl font-bold">
+                <div className={`text-[#333333] text-xl font-bold ${notoSansJP.className}`}>
                   {talk.speakers[0]?.name}
                 </div>
                 {speakers[0]?.twitter && (
                   <div
-                    className={`text-[#5C5C5C] text-xl font-bold ${isWrapped ? 'w-full ps-[94px]' : ''}`}
+                    className={`text-[#5C5C5C] text-xl font-bold ${notoSansJP.className} ${isWrapped ? 'w-full ps-[94px]' : ''}`}
                   >
                     @{speakers[0].twitter}
                   </div>

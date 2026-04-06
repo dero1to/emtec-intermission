@@ -38,10 +38,8 @@ export default function Page({ view, isDk }: PageProps) {
             <Side view={view} />
           </div>
         </div>
-        <div className="h-[80px] flex items-center justify-center text-xl font-bold text-[#333333] mt-5">
-          <p>
-            何か注意があったら入れるなど？落とし物、忘れ物はピンクの腕章を付けたスタッフにお声がけください！
-          </p>
+        <div className="h-[80px] flex items-center justify-center text-2.5xl font-bold text-[#333333] mt-5">
+          <p>落とし物、忘れ物はスタッフにお声がけください！</p>
         </div>
       </div>
     </div>

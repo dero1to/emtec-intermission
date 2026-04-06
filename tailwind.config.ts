@@ -13,6 +13,7 @@ const config: Config = {
         'din-2014': ['din-2014', 'sans-serif'],
         'ryo-gothic-plusn': ['ryo-gothic-plusn', 'sans-serif'],
         sen: ['Sen', 'sans-serif'],
+        'noto-sans-jp': ['Noto Sans JP', 'sans-serif'],
       },
       colors: {
         'COLOR-TIMETABLE-Box': '#1297cc',

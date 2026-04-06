@@ -2,6 +2,7 @@ import { Optional } from '@/utils/types'
 import { TalkView } from '../../models/talkView'
 import { getTimeStr } from '@/utils/time'
 import { trim } from '@/utils/utils'
+import Image from 'next/image'
 
 type Props = { view: Optional<TalkView>; isDk?: boolean }
 
@@ -25,6 +26,8 @@ export function Side({ view }: Props) {
     .talksInSameTrack()
     .filter((t) => t.talkCategory !== 'Keynote' && t.startTime > talkStartTime)
     .slice(0, 4)
+  const emptySlots = 4 - talks.length
+
   return (
     <div className="ps-[30px] pt-[115px] flex flex-col items-center">
       {talks.map((talk) => (
@@ -41,9 +44,22 @@ export function Side({ view }: Props) {
               {talk.speakers[0]?.name}
             </div>
           </div>
-          <div className="text-center text-[#333333] text-base min-h-[70px] py-2 font-bold">
+          <div className="text-center text-[#333333] text-base min-h-[70px] py-2 font-bold flex items-center justify-center">
             {trim(talk.title, 45)}
           </div>
+        </div>
+      ))}
+      {Array.from({ length: emptySlots }).map((_, i) => (
+        <div
+          key={`naruto-${i}`}
+          className="w-[580px] h-[130px] flex items-center justify-center my-3"
+        >
+          <Image
+            src="/phpcon_odawara/naruto.png"
+            alt="logo"
+            width={100}
+            height={100}
+          />
         </div>
       ))}
     </div>

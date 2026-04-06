@@ -35,18 +35,22 @@ export default function Header({ view, isDk }: Props) {
       </div>
 
       <div className="basis-1/3 flex items-center justify-center">
-        <div className="px-5 py-2 bg-red-200 rounded-full text-5xl text-center">
+        <div className="px-14 py-2 bg-[#fed3df] rounded-full text-5xl text-center">
           {now.format('HH:mm:ss')}
         </div>
       </div>
 
       <div className="basis-1/3 flex items-end justify-center">
         <div className="basis-1/2 flex items-end justify-center">
-          <div className="text-base text-center opacity-75">部屋</div>
-          <div className="text-4xl text-center">{view.selectedTrack.name}</div>
+          <div className="text-lg text-center opacity-75 self-end pb-3">
+            部屋
+          </div>
+          <div className="text-4xl text-center self-end ms-3">
+            {view.selectedTrack.name}
+          </div>
         </div>
         <div className="basis-1/2 flex items-end justify-start">
-          <div className="text-2xl text-left">
+          <div className="text-xl text-left font-sen">
             {view.selectedTrack.hashTag ? (
               <>
                 #{eventAbbrToShow}
