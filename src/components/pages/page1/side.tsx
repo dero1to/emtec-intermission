@@ -1,6 +1,5 @@
 import { Optional } from '@/utils/types'
 import { TalkView } from '../../models/talkView'
-import { getTimeStr } from '@/utils/time'
 import { trim } from '@/utils/utils'
 import Image from 'next/image'
 
@@ -10,55 +9,57 @@ export function Side({ view }: Props) {
   if (!view) {
     return <></>
   }
-  // 現在のトークより前のものは表示しない
-  const talkStartTime = view.talksLeftInSameTrack()[0]?.startTime
-  if (!talkStartTime) {
-    return <></>
-  }
-  // 午前セッションは、keynoteとして1枠で表示する。
-  const _hasKeynote =
-    view
-      .talksInSameTrack()
-      .filter(
-        (t) => t.talkCategory === 'Keynote' && t.startTime > talkStartTime
-      ).length > 0
-  const talks = view
-    .talksInSameTrack()
-    .filter((t) => t.talkCategory !== 'Keynote' && t.startTime > talkStartTime)
-    .slice(0, 4)
-  const emptySlots = 4 - talks.length
+  // 裏番組（同じ時間帯の他トラックのトーク）を表示
+  const nextSlot = view.talksInNextSlot()
+  const myTrackName = view.selectedTrack.name
+  const talks = Object.entries(nextSlot)
+    .filter(([trackName]) => trackName !== myTrackName)
+    .map(([trackName, talk]) => ({ trackName, talk }))
+    .slice(0, 2)
+  const emptySlots = 2 - talks.length
 
   return (
     <div className="ps-[30px] pt-[115px] flex flex-col items-center">
-      {talks.map((talk) => (
-        <div
-          key={talk.id}
-          className="text-right w-[580px] h-[130px] backdrop-blur-xl bg-white px-4 pt-3 pb-2 my-3 rounded-xl shadow-lg"
-        >
-          <div className="flex flex-row">
-            <div className="text-left basis-1/2 text-[#333333] text-sm font-bold">
-              {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
+      {talks.map(({ trackName, talk }) => {
+        const speakers = view.speakersOf(talk.id)
+        return (
+          <div
+            key={talk.id}
+            className="w-[580px] h-[284px] backdrop-blur-xl bg-white px-6 pt-6 pb-3 my-3 rounded-xl shadow-lg flex flex-col"
+          >
+            <div className="flex items-center justify-between">
+              <span className="inline-block px-5 py-2 bg-[#FFEDF2] text-[#333333] text-base font-bold rounded-full">
+                {trackName}
+              </span>
+              <div className="flex items-center gap-3">
+                <span className="text-[#333333] text-base font-bold">
+                  {talk.speakers[0]?.name}
+                </span>
+                <Image
+                  className="rounded-full shrink-0"
+                  src={speakers[0]?.avatarUrl || '/phpcon_odawara/naruto.png'}
+                  alt={speakers[0]?.name || 'speaker'}
+                  width={50}
+                  height={50}
+                />
+              </div>
             </div>
-            <div className="basis-1/2 text-[#333333] text-sm font-bold">
-              {/* {talk.speakers.map((t) => t.name).join(', ')} */}
-              {talk.speakers[0]?.name}
+            <div className="flex-1 text-center text-[#333333] text-lg px-2 font-bold flex items-center justify-center">
+              {trim(talk.title, 80)}
             </div>
           </div>
-          <div className="text-center text-[#333333] text-base min-h-[70px] py-2 font-bold flex items-center justify-center">
-            {trim(talk.title, 45)}
-          </div>
-        </div>
-      ))}
+        )
+      })}
       {Array.from({ length: emptySlots }).map((_, i) => (
         <div
           key={`naruto-${i}`}
-          className="w-[580px] h-[130px] flex items-center justify-center my-3"
+          className="w-[580px] h-[284px] flex items-center justify-center my-3"
         >
           <Image
             src="/phpcon_odawara/naruto.png"
             alt="logo"
-            width={100}
-            height={100}
+            width={140}
+            height={140}
           />
         </div>
       ))}
