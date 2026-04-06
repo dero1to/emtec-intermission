@@ -22,6 +22,10 @@ const config: Config = {
         'COLOR-UPCOMING-SESSION-LABEL':
           'linear-gradient(to right, #fff000, #f97f23, #e5640c)',
       },
+      animation: {
+        'spin-slow': 'spin 40s linear infinite',
+        'spin-slow-reverse': 'spin 40s linear infinite reverse',
+      },
     },
     fontSize: {
       xxs: ['11px', '16px'],

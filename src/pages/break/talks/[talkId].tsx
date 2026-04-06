@@ -116,9 +116,8 @@ function Pages() {
       )}
       <AudioPlayer src={audioSrc} shouldPlay={shouldPlayAudio} />
       {/* <AvatarPreLoader view={view}></AvatarPreLoader> */}
-      <div className="w-[1920px] h-[1080px] relative">
-        <Image
-          // src="/phpcon_odawara/background-test.png"
+      <div className="w-[1920px] h-[1080px] relative bg-[#FFEDF2] overflow-hidden">
+        {/* <Image
           src="/phpcon_odawara/background.png"
           alt="background"
           className="-z-10"
@@ -126,7 +125,31 @@ function Pages() {
           quality={100}
           style={{ objectFit: 'cover' }}
           priority
-        />
+        /> */}
+        {/* 右上 vector - 回転中心を左下(=コーナー)に */}
+        <div
+          className="absolute top-0 right-0 w-[800px] h-[800px] z-0 animate-spin-slow"
+          style={{ translate: '400px -400px' }}
+        >
+          <Image
+            src="/phpcon_odawara/vector.png"
+            alt=""
+            fill
+            style={{ objectFit: 'contain' }}
+          />
+        </div>
+        {/* 左下 vector - 回転中心を右上(=コーナー)に */}
+        <div
+          className="absolute bottom-0 left-0 w-[800px] h-[800px] z-0 animate-spin-slow-reverse"
+          style={{ translate: '-400px 400px' }}
+        >
+          <Image
+            src="/phpcon_odawara/vector.png"
+            alt=""
+            fill
+            style={{ objectFit: 'contain' }}
+          />
+        </div>
         {/* ローディング画面 */}
         {isLoading && (
           <div className="absolute inset-0 z-10">
