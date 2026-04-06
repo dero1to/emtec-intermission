@@ -15,6 +15,7 @@ export const talks: Talk[] = [
     startTime: '2026-04-11T10:00:00+09:00',
     endTime: '2026-04-11T11:10:00+09:00',
     conferenceDayId: 1,
+    isMovieSkip: true,
   },
   {
     id: 102,
