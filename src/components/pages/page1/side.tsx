@@ -39,7 +39,7 @@ export function Side({ view }: Props) {
             <div className="text-left basis-1/2 text-[#333333] text-sm font-bold">
               {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
             </div>
-            <div className="basis-1/2 text-[#333333] text-sm">
+            <div className="basis-1/2 text-[#333333] text-sm font-bold">
               {/* {talk.speakers.map((t) => t.name).join(', ')} */}
               {talk.speakers[0]?.name}
             </div>
