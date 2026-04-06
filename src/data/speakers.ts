@@ -224,4 +224,10 @@ export const speakers: Speaker[] = [
     avatarUrl:
       'https://fortee.jp/files/phpconodawara-2026/speaker/b18f3fce-64b4-4a34-b8f3-f4ec64fe1419.jpg',
   },
+  {
+    id: 39,
+    name: 'Sebastian Bergmann',
+    twitter: 'sebastianbergmann',
+    avatarUrl: 'https://phpcon-odawara.jp/images/2026/sebastian-bergmann.jpg',
+  },
 ]
