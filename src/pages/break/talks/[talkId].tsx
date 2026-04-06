@@ -1,7 +1,7 @@
 import AudioPlayer from '@/components/media/AudioPlayer'
 import Page1 from '@/components/pages/page1/index'
 // import Page2, { AvatarPreLoader } from '@/components/pages/page2/index'
-// import Page3 from '@/components/pages/page3/index'
+import Page3 from '@/components/pages/page3/index'
 import Page4 from '@/components/pages/page4/index'
 import Loading from '@/components/common/Loading'
 import { PageCtx, PageCtxProvider } from '@/components/models/pageContext'
@@ -50,24 +50,33 @@ function Pages() {
   }, [])
 
   const hasMovie = view?.selectedTalk.isMovieSkip !== true
+  const [moviePlayed, setMoviePlayed] = useState(false)
+
   const pages = [
-    ...(hasMovie
+    ...(hasMovie && !moviePlayed
       ? [{ name: 'Page4', component: <Page4 key={4} view={view} /> }]
       : []),
     { name: 'Page1', component: <Page1 key={1} view={view} isDk={false} /> },
     // { name: 'Page2', component: <Page2 key={2} view={view} isDk={false} /> },
-    // { name: 'Page3', component: <Page3 key={3} view={view} isDk={false} /> },
+    { name: 'Page3', component: <Page3 key={3} view={view} isDk={false} /> },
   ]
   useEffect(() => {
     setTotalPage(pages.length)
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [moviePlayed]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Page4再生完了後にフラグを立てる
+  useEffect(() => {
+    if (hasMovie && !moviePlayed && pages[current]?.name !== 'Page4') {
+      setMoviePlayed(true)
+    }
+  }, [current]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // デバッグ用: 現在のコンポーネント名をコンソールに出力
   useEffect(() => {
     if (config.debug) {
-      console.log(`Current component: ${pages[current].name}`)
+      console.log(`Current component: ${pages[current]?.name}`)
     }
-  }, [current]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [current, moviePlayed]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const audioSrc = '/janog57/bgm_day3.mp3'
   // const audioSrc =
