@@ -27,10 +27,14 @@ export function Main({ view, isDk: _isDk }: Props) {
   const titleLen = talk.title.length
   const titleSize = (() => {
     switch (true) {
-      case titleLen <= 15:
+      case titleLen <= 10:
         return 'text-4xl'
-      case titleLen <= 60:
+      case titleLen <= 20:
+        return 'text-3.5xl'
+      case titleLen <= 30:
         return 'text-3xl'
+      case titleLen <= 50:
+        return 'text-2.5xl'
       default:
         return 'text-2xl'
     }
@@ -39,8 +43,9 @@ export function Main({ view, isDk: _isDk }: Props) {
   return (
     <div className="text-[#333333] mt-[50px] ms-6">
       <div>
-        <div className="text-left font-bold font-din-2014 tracking-wide text-2xl">
-          NEXT SESSION {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
+        <div className="text-left font-bold font-sen tracking-wide text-3xl">
+          <span className="text-3.5xl">NEXT SESSION</span>　
+          {getTimeStr(talk.startTime)} - {getTimeStr(talk.endTime)}
         </div>
       </div>
       <div className="mt-[30px] w-[1040px] h-[590px] flex items-center justify-center border-4 border-gray-300 bg-[#FFEDF2] rounded-2xl shadow-lg">
