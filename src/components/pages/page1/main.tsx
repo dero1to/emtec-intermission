@@ -1,7 +1,7 @@
 import { Optional } from '@/utils/types'
 import { TalkView } from '../../models/talkView'
 import { getTimeStr } from '@/utils/time'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Noto_Sans_JP } from 'next/font/google'
 
@@ -17,7 +17,10 @@ export function Main({ view, isDk: _isDk }: Props) {
   const [isWrapped, setIsWrapped] = useState(false)
 
   const talk = view?.talksLeftInSameTrack()[0]
-  const speakers = talk ? view?.speakersOf(talk.id) : []
+  const speakers = useMemo(
+    () => (talk ? view?.speakersOf(talk.id) : []),
+    [talk, view]
+  )
 
   useEffect(() => {
     const el = wrapRef.current
@@ -81,7 +84,9 @@ export function Main({ view, isDk: _isDk }: Props) {
                   width={75}
                   height={75}
                 />
-                <div className={`text-[#333333] text-xl font-bold ${notoSansJP.className}`}>
+                <div
+                  className={`text-[#333333] text-xl font-bold ${notoSansJP.className}`}
+                >
                   {talk.speakers[0]?.name}
                 </div>
                 {speakers[0]?.twitter && (

@@ -1,7 +1,7 @@
 import AudioPlayer from '@/components/media/AudioPlayer'
 import Page1 from '@/components/pages/page1/index'
 // import Page2, { AvatarPreLoader } from '@/components/pages/page2/index'
-import Page3 from '@/components/pages/page3/index'
+// import Page3 from '@/components/pages/page3/index'
 // import Page4 from '@/components/pages/page4/index'
 // import Loading from '@/components/common/Loading'
 import { PageCtx, PageCtxProvider } from '@/components/models/pageContext'

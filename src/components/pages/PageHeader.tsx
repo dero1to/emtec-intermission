@@ -35,7 +35,7 @@ export default function Header({ view, isDk }: Props) {
       </div>
 
       <div className="basis-1/3 flex items-center justify-center">
-        <div className="px-14 py-2 bg-[#fed3df] rounded-full text-5xl text-center">
+        <div className="px-14 py-2 bg-[#fed3df] text-[#333333] rounded-full text-5xl text-center">
           {now.format('HH:mm:ss')}
         </div>
       </div>
