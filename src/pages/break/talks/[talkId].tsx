@@ -28,7 +28,7 @@ function Pages() {
     extendConfig(router.query as Record<string, string>)
   }, [router.query])
 
-  const { current, setTotalPage, goNextPage, resetPage } = useContext(PageCtx)
+  const { current, setTotalPage, goNextPage } = useContext(PageCtx)
 
   const view = useMemo(() => {
     if (!talkId) {
@@ -50,40 +50,30 @@ function Pages() {
   }, [])
 
   const hasMovie = view?.selectedTalk.isMovieSkip !== true
-  const [moviePlayed, setMoviePlayed] = useState(false)
+  const [moviePlayed, setMoviePlayed] = useState(!hasMovie)
 
   const pages = [
-    ...(hasMovie && !moviePlayed
-      ? [{ name: 'Page4', component: <Page4 key={4} view={view} /> }]
-      : []),
     { name: 'Page1', component: <Page1 key={1} view={view} isDk={false} /> },
     // { name: 'Page2', component: <Page2 key={2} view={view} isDk={false} /> },
     { name: 'Page3', component: <Page3 key={3} view={view} isDk={false} /> },
   ]
+
   useEffect(() => {
     setTotalPage(pages.length)
-  }, [moviePlayed]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Page4再生完了後にフラグを立て、currentを0(=Page1)にリセット
-  useEffect(() => {
-    if (hasMovie && !moviePlayed && pages[current]?.name !== 'Page4') {
-      setMoviePlayed(true)
-      resetPage()
-    }
-  }, [current]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // デバッグ用: 現在のコンポーネント名をコンソールに出力
   useEffect(() => {
     if (config.debug) {
       console.log(`Current component: ${pages[current]?.name}`)
     }
-  }, [current, moviePlayed]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [current]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const audioSrc = '/janog57/bgm_day3.mp3'
   // const audioSrc =
   //   'https://pub-ac15e822806e471884e2b63b26f353c6.r2.dev/bgm/203_fixed.mp3'
 
-  const shouldPlayAudio = pages[current].name !== 'Page4'
+  const shouldPlayAudio = moviePlayed
 
   return (
     <>
@@ -160,8 +150,14 @@ function Pages() {
             />
           </div>
         )}
+        {/* Page4 (動画) - 初回のみ再生 */}
+        {!moviePlayed && (
+          <div className="absolute inset-0 z-20">
+            <Page4 view={view} onEnded={() => setMoviePlayed(true)} />
+          </div>
+        )}
         {/* コンテンツ */}
-        {!isLoading && (
+        {!isLoading && moviePlayed && (
           <div className="absolute inset-0 content-fade-in">
             {pages[current].component}
           </div>

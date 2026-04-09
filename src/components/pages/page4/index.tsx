@@ -5,7 +5,7 @@ import { PageCtx } from '../../models/pageContext'
 import VideoPlaylist, { Playlist } from '../../media/VideoPlaylist'
 import { pushPageMeasurement, pushPageEvent } from '@/lib/faro'
 
-type Props = { view: Optional<TalkView> }
+type Props = { view: Optional<TalkView>; onEnded?: () => void }
 
 // CM スポンサーがいない時には 各 source をコメントアウトする
 
@@ -28,7 +28,7 @@ const playlist: Playlist = [
   // },
 ]
 
-export default function Page(_: Props) {
+export default function Page({ onEnded }: Props) {
   const { goNextPage } = useContext(PageCtx)
   const renderStartTime = useRef(performance.now())
 
@@ -40,7 +40,11 @@ export default function Page(_: Props) {
 
   const handleEnded = () => {
     pushPageEvent('Page4', 'page_exit')
-    goNextPage()
+    if (onEnded) {
+      onEnded()
+    } else {
+      goNextPage()
+    }
   }
 
   return (
