@@ -11,6 +11,11 @@ const TOOLS = [
     title: 'PDF変換ツール',
     description: 'PDFファイルを画像に変換するツール',
   },
+  {
+    href: '/tools/video-check',
+    title: '動画比較プレイヤー',
+    description: '2つの動画を並べて再生・音声波形を比較',
+  },
 ] as const
 
 function LinkCard({
