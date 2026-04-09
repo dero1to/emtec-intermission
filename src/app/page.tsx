@@ -16,6 +16,12 @@ const TOOLS = [
     title: '動画比較プレイヤー',
     description: '2つの動画を並べて再生・音声波形を比較',
   },
+  {
+    href: 'https://roland-switcher-layer.pages.dev/',
+    title: 'Roland Switcher Layer',
+    description: 'Rolandの映像スイッチャー用レイヤー管理ツール',
+    external: true,
+  },
 ] as const
 
 function LinkCard({
