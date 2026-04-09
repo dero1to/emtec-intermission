@@ -23,7 +23,7 @@ export default function Page({ view, isDk }: PageProps) {
   }, [count, goNextPage])
 
   return (
-    <div>
+    <div className="m-auto w-[90%]">
       <PageHeader view={view} isDk={isDk} />
       <Image
         src={`/${alias}/${images[count]}`}
