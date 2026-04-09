@@ -22,11 +22,16 @@ function generateNanoId(): string {
 
 // レイアウトボタン定義
 const LAYOUT_BUTTONS = [
-  { text: 'Slide', macroIndex: 0, dthCode: '00' },
-  { text: 'Futae', macroIndex: 1, dthCode: '01' },
-  { text: 'Person', macroIndex: 2, dthCode: '02' },
-  { text: 'Logo', macroIndex: 3, dthCode: '03' },
-  { text: 'End', macroIndex: 4, dthCode: '04' },
+  { text: '発表', macroIndex: 0, dthCode: '02', obsScene: '------' },
+  { text: '蓋絵', macroIndex: 1, dthCode: '00', obsScene: '------' },
+  {
+    text: 'CAM\n配信のみ',
+    macroIndex: 2,
+    dthCode: '03',
+    obsScene: '------',
+  },
+  { text: '1分間\nFB', macroIndex: 4, dthCode: '01', obsScene: 'CountDown' },
+  { text: 'トラブル時', macroIndex: 3, dthCode: '04', obsScene: '------' },
 ]
 
 // 特殊ボタン定義
@@ -35,19 +40,19 @@ const SPECIAL_BUTTONS = {
     text: 'Count',
     obsScene: 'CountDown',
     macroIndex: 5,
-    dthCode: '05',
+    dthCode: '01',
   },
   trackA: {
     text: 'TrackA',
     obsScene: 'TrackA',
     macroIndex: 5,
-    dthCode: '05',
+    dthCode: '01',
   },
   slido: {
     text: 'Slido',
     obsScene: '------',
     macroIndex: 6,
-    dthCode: '06',
+    dthCode: '01',
   },
 }
 
@@ -322,7 +327,7 @@ export default function CompanionConfigGenerate({
     // 時刻ボタンリスト
     const timeButtons: ButtonItem[] = times.map((time) => ({
       type: 'time' as const,
-      text: time,
+      text: `幕間\n${time}`,
       obsScene: `${time} ~`,
       macroIndex: 5,
       dthCode: '05',
@@ -332,7 +337,7 @@ export default function CompanionConfigGenerate({
     const attackButtons: ButtonItem[] = includeAttack
       ? times.map((time) => ({
           type: 'time' as const,
-          text: `Video\n${time}`,
+          text: `アタック\n${time}`,
           obsScene: `Attack_${time}`,
           macroIndex: 5,
           dthCode: '05',
@@ -414,7 +419,7 @@ export default function CompanionConfigGenerate({
         }
 
         // OBS用アクション
-        actions.push(createObsSetSceneAction(obsConnectionId, '------'))
+        actions.push(createObsSetSceneAction(obsConnectionId, btn.obsScene))
 
         controls['0'][col.toString()] = createButton(btn.text, '18', actions)
       })
@@ -452,7 +457,7 @@ export default function CompanionConfigGenerate({
           )
           controls['1'][i.toString()] = createButton(
             timeBtn.text,
-            '24',
+            '18',
             timeActions
           )
 
@@ -472,7 +477,7 @@ export default function CompanionConfigGenerate({
           )
           controls['2'][i.toString()] = createButton(
             attackBtn.text,
-            '24',
+            '14',
             attackActions
           )
         }
@@ -500,7 +505,7 @@ export default function CompanionConfigGenerate({
             )
             controls['2'][specialCol.toString()] = createButton(
               specialBtn.text,
-              '24',
+              '14',
               specialActions
             )
             specialCol++
@@ -536,7 +541,7 @@ export default function CompanionConfigGenerate({
               createObsSetSceneAction(obsConnectionId, item.obsScene)
             )
 
-            controls['1'][i.toString()] = createButton(item.text, '24', actions)
+            controls['1'][i.toString()] = createButton(item.text, '18', actions)
           }
         }
 
@@ -561,7 +566,7 @@ export default function CompanionConfigGenerate({
               createObsSetSceneAction(obsConnectionId, item.obsScene)
             )
 
-            controls['2'][i.toString()] = createButton(item.text, '24', actions)
+            controls['2'][i.toString()] = createButton(item.text, '14', actions)
           }
         }
 
