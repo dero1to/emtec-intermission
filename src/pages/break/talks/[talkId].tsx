@@ -28,7 +28,7 @@ function Pages() {
     extendConfig(router.query as Record<string, string>)
   }, [router.query])
 
-  const { current, setTotalPage, goNextPage } = useContext(PageCtx)
+  const { current, setTotalPage, goNextPage, resetPage } = useContext(PageCtx)
 
   const view = useMemo(() => {
     if (!talkId) {
@@ -49,8 +49,13 @@ function Pages() {
     }
   }, [])
 
-  const hasMovie = view?.selectedTalk.isMovieSkip !== true
-  const [moviePlayed, setMoviePlayed] = useState(!hasMovie)
+  const [moviePlayed, setMoviePlayed] = useState(false)
+
+  useEffect(() => {
+    if (view?.selectedTalk.isMovieSkip) {
+      setMoviePlayed(true)
+    }
+  }, [view])
 
   const pages = [
     { name: 'Page1', component: <Page1 key={1} view={view} isDk={false} /> },
@@ -153,13 +158,19 @@ function Pages() {
         {/* Page4 (動画) - 初回のみ再生 */}
         {!moviePlayed && (
           <div className="absolute inset-0 z-20">
-            <Page4 view={view} onEnded={() => setMoviePlayed(true)} />
+            <Page4
+              view={view}
+              onEnded={() => {
+                resetPage()
+                setMoviePlayed(true)
+              }}
+            />
           </div>
         )}
         {/* コンテンツ */}
         {!isLoading && moviePlayed && (
           <div className="absolute inset-0 content-fade-in">
-            {pages[current].component}
+            {pages[current]?.component}
           </div>
         )}
       </div>
