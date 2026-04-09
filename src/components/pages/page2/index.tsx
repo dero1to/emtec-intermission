@@ -1,12 +1,11 @@
 import { Optional } from '@/utils/types'
 import { TalkView } from '../../models/talkView'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect } from 'react'
 import { PageCtx } from '../../models/pageContext'
 import config from '@/config'
 import type { Speaker, Talk, Track } from '@/data/types'
 import PageHeader from '../PageHeader'
 import { getTime, getTimeStr } from '@/utils/time'
-import { pushPageMeasurement, pushPageEvent } from '@/lib/faro'
 import { useAvatarSlider } from '../../hooks/useAvatarSlider'
 import { RollingAvatar } from '../../avatar/RollingAvatar'
 
@@ -85,15 +84,9 @@ const DEFAULT_AVATAR =
 
 export default function Page({ view, isDk }: PageProps) {
   const { goNextPage } = useContext(PageCtx)
-  const renderStartTime = useRef(performance.now())
 
   useEffect(() => {
-    const duration = performance.now() - renderStartTime.current
-    pushPageMeasurement('Page2', duration)
-    pushPageEvent('Page2', 'page_displayed')
-
     const cancel = setTimeout(() => {
-      pushPageEvent('Page2', 'page_exit')
       goNextPage()
     }, config.transTimePage2 * 1000)
     return () => clearTimeout(cancel)
