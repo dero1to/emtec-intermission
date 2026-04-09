@@ -14,6 +14,9 @@ type template = {
   full_url?: string
 }
 
+// パブビュー (Public Viewing) シーンで表示する YouTube URL
+const PUBVIEW_YOUTUBE_URL = 'https://www.youtube.com'
+
 /**
  * 配列または文字列を正規化
  */
@@ -500,6 +503,7 @@ export default function ObsSceneGenerate({
       { name: 'FUTA' },
       { name: '------' },
       { name: 'CountDown' },
+      { name: 'パブビュー' },
       { name: '-------' },
     ]
 
@@ -522,6 +526,28 @@ export default function ObsSceneGenerate({
     // 固定シーン（区切り線）をJSONから読み込んで追加
     const separatorScenes = await loadSeparatorScenes()
     sources.push(...separatorScenes)
+
+    // パブビューシーン（YouTube埋め込みのブラウザソース）を追加
+    const pubviewBrowserName = 'Browser_パブビュー'
+    const pubviewBrowserUuid = generateUUID()
+    const pubviewSceneUuid = generateUUID()
+    sources.push(
+      createSceneWithBrowser(
+        'パブビュー',
+        pubviewBrowserName,
+        pubviewBrowserUuid,
+        pubviewSceneUuid
+      )
+    )
+    sources.push(
+      createBrowserSource(
+        pubviewBrowserName,
+        PUBVIEW_YOUTUBE_URL,
+        pubviewBrowserUuid,
+        true,
+        true
+      )
+    )
 
     // アタック動画用の一時リスト
     const attackSceneOrders: { name: string }[] = []
