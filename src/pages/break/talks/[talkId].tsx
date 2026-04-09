@@ -74,7 +74,7 @@ function Pages() {
     }
   }, [current]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const audioSrc = '/janog57/bgm_day3.mp3'
+  const audioSrc = '/phpcon_odawara/午後のまったり.mp3'
   // const audioSrc =
   //   'https://pub-ac15e822806e471884e2b63b26f353c6.r2.dev/bgm/203_fixed.mp3'
 
@@ -136,7 +136,7 @@ function Pages() {
         </div>
         {/* 左下 vector - 回転中心を右上(=コーナー)に */}
         <div
-          className="absolute bottom-0 left-0 w-[800px] h-[800px] z-0 animate-spin-slow-reverse"
+          className="absolute bottom-0 left-0 w-[800px] h-[800px] z-0 animate-spin-slow"
           style={{ translate: '-400px 400px' }}
         >
           <Image

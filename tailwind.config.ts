@@ -23,8 +23,8 @@ const config: Config = {
           'linear-gradient(to right, #fff000, #f97f23, #e5640c)',
       },
       animation: {
-        'spin-slow': 'spin 40s linear infinite',
-        'spin-slow-reverse': 'spin 40s linear infinite reverse',
+        'spin-slow': 'spin 60s linear infinite',
+        // 'spin-slow-reverse': 'spin 60s linear infinite',
       },
     },
     fontSize: {
