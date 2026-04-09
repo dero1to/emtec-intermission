@@ -91,7 +91,7 @@ function Section({
 }
 
 export default function Home() {
-  const { dkEventAbbr, eventAbbr } = config
+  const { eventAbbr } = config
 
   const staticDays = talks?.length
     ? [
@@ -124,15 +124,6 @@ export default function Home() {
       <main className="flex flex-1 flex-col p-12">
         <div className="mx-auto flex w-full max-w-5xl flex-1 items-start gap-8">
           <div className="flex w-3/4 flex-col gap-12">
-            {/* <Section
-              title="Dreamkast API"
-              badge={dkEventAbbr}
-              description="Dreamkast APIからトーク情報を取得"
-            >
-              <LinkCard href="/break-dk/menu/1" title="Day 1" />
-              <LinkCard href="/break-dk/menu/2" title="Day 2" />
-            </Section> */}
-
             {staticDays.length > 0 && (
               <Section
                 title="静的TSファイル"
