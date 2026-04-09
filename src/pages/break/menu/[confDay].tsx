@@ -463,6 +463,15 @@ function ObsModal({ confDay, track }: ObsModalProps) {
                   onChange={(e) => setUsername(e.target.value)}
                   className="w-full px-3 py-1.5 bg-neutral-900 border border-neutral-600 rounded text-xs text-white focus:outline-none focus:border-blue-500"
                   placeholder="OS username"
+                  name="os-user-path"
+                  id="os-user-path"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
+                  data-lpignore="true"
+                  data-1p-ignore="true"
+                  data-form-type="other"
                 />
                 <div className="mt-2 p-2 bg-neutral-900 rounded text-[10px] text-neutral-400 font-mono break-all">
                   {os === 'mac'

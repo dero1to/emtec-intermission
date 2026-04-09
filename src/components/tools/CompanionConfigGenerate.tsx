@@ -29,6 +29,7 @@ const LAYOUT_BUTTONS = [
     macroIndex: 2,
     dthCode: '03',
     obsScene: '------',
+    size: '14',
   },
   { text: '1分間\nFB', macroIndex: 4, dthCode: '01', obsScene: 'CountDown' },
   { text: 'トラブル時', macroIndex: 3, dthCode: '04', obsScene: '------' },
@@ -43,8 +44,8 @@ const SPECIAL_BUTTONS = {
     dthCode: '01',
   },
   trackA: {
-    text: 'TrackA',
-    obsScene: 'TrackA',
+    text: 'パブビュー',
+    obsScene: 'パブビュー',
     macroIndex: 5,
     dthCode: '01',
   },
@@ -330,7 +331,7 @@ export default function CompanionConfigGenerate({
       text: `幕間\n${time}`,
       obsScene: `${time} ~`,
       macroIndex: 5,
-      dthCode: '05',
+      dthCode: '01',
     }))
 
     // アタック動画ボタンリスト
@@ -340,7 +341,7 @@ export default function CompanionConfigGenerate({
           text: `アタック\n${time}`,
           obsScene: `Attack_${time}`,
           macroIndex: 5,
-          dthCode: '05',
+          dthCode: '01',
         }))
       : []
 
@@ -421,7 +422,11 @@ export default function CompanionConfigGenerate({
         // OBS用アクション
         actions.push(createObsSetSceneAction(obsConnectionId, btn.obsScene))
 
-        controls['0'][col.toString()] = createButton(btn.text, '18', actions)
+        controls['0'][col.toString()] = createButton(
+          btn.text,
+          ('size' in btn && typeof btn.size === 'string' ? btn.size : '18'),
+          actions
+        )
       })
 
       // 複数ページの場合は col 4 をナビゲーションに使用

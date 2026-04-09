@@ -101,7 +101,7 @@ row 2: (時刻(Attack) or 残りの時刻+特殊ボタン)            ← 複数
 | key | text | obsScene | macroIndex | dthCode |
 | --- | --- | --- | --- | --- |
 | `count` | Count | CountDown | 5 | 01 (OBS) |
-| `trackA` | TrackA | TrackA | 5 | 01 (OBS) |
+| `trackA` | パブビュー | パブビュー | 5 | 01 (OBS) |
 | `slido` | Slido | `------` | 6 | 01 (OBS) |
 
 > 特殊ボタンは VR-6HD 側で OBS 入力 (`01`) に切り替えた上で、OBS 側のシーンを変更する二段構えです。
