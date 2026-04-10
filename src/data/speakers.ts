@@ -227,7 +227,6 @@ export const speakers: Speaker[] = [
   {
     id: 39,
     name: 'Sebastian Bergmann',
-    twitter: 'sebastianbergmann',
-    avatarUrl: 'https://phpcon-odawara.jp/images/2026/sebastian-bergmann.jpg',
+    avatarUrl: '/phpcon_odawara/sebastian@2x.png',
   },
 ]
