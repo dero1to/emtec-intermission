@@ -74,7 +74,7 @@ function Pages() {
     }
   }, [current]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const audioSrc = '/phpcon_odawara/午後のまったり.mp3'
+  const audioSrc = '/phpcon_odawara/bgm.mp3'
   // const audioSrc =
   //   'https://pub-ac15e822806e471884e2b63b26f353c6.r2.dev/bgm/203_fixed.mp3'
 
