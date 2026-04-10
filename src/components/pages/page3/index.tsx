@@ -8,9 +8,16 @@ import Image from 'next/image'
 
 type PageProps = { view: Optional<TalkView>; isDk: boolean }
 
-const alias: string = 'janog57'
+const alias: string = 'phpcon_odawara'
 
-const images: string[] = ['info_001.jpg']
+const images: string[] = [
+  'info_002.jpg',
+  'info_003.jpg',
+  'info_004.jpg',
+  'info_005.jpg',
+  'info_006.jpg',
+  'info_007.jpg',
+]
 
 export default function Page({ view, isDk }: PageProps) {
   const { goNextPage } = useContext(PageCtx)
