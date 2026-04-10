@@ -46,12 +46,10 @@ export default function VideoCheck() {
   })
   const isSeekingRef = useRef(false)
 
-  const [file1Info, setFile1Info] = useState<string>(
-    'ファイルを選択してください'
-  )
-  const [file2Info, setFile2Info] = useState<string>(
-    'ファイルを選択してください'
-  )
+  const [file1Info, setFile1Info] =
+    useState<string>('ファイルを選択してください')
+  const [file2Info, setFile2Info] =
+    useState<string>('ファイルを選択してください')
   const [seekValue, setSeekValue] = useState(0)
   const [timeDisplay, setTimeDisplay] = useState('0:00 / 0:00')
   const [volume, setVolume] = useState(0.5)
@@ -145,8 +143,7 @@ export default function VideoCheck() {
     if (!ctx) return
     const v1 = video1Ref.current
     const v2 = video2Ref.current
-    const duration =
-      maxDuration || v1?.duration || v2?.duration || 60
+    const duration = maxDuration || v1?.duration || v2?.duration || 60
     canvas.width = Math.min(canvas.offsetWidth * 2, 8000)
     canvas.height = canvas.offsetHeight * 2
 
@@ -275,7 +272,8 @@ export default function VideoCheck() {
       const file = e.target.files?.[0]
       if (!file) return
       const videoEl = videoNum === 1 ? video1Ref.current : video2Ref.current
-      const canvas = videoNum === 1 ? waveform1Ref.current : waveform2Ref.current
+      const canvas =
+        videoNum === 1 ? waveform1Ref.current : waveform2Ref.current
       if (!videoEl || !canvas) return
       fileDataRef.current[videoNum] = {
         name: file.name,
@@ -288,27 +286,24 @@ export default function VideoCheck() {
     [analyzeAudio]
   )
 
-  const updateAudio = useCallback(
-    (mode: AudioMode, vol: number) => {
-      const v1 = video1Ref.current
-      const v2 = video2Ref.current
-      if (!v1 || !v2) return
-      if (mode === '1') {
-        v1.volume = vol
-        v2.volume = 0
-      } else if (mode === '2') {
-        v1.volume = 0
-        v2.volume = vol
-      } else if (mode === 'both') {
-        v1.volume = vol
-        v2.volume = vol
-      } else {
-        v1.volume = 0
-        v2.volume = 0
-      }
-    },
-    []
-  )
+  const updateAudio = useCallback((mode: AudioMode, vol: number) => {
+    const v1 = video1Ref.current
+    const v2 = video2Ref.current
+    if (!v1 || !v2) return
+    if (mode === '1') {
+      v1.volume = vol
+      v2.volume = 0
+    } else if (mode === '2') {
+      v1.volume = 0
+      v2.volume = vol
+    } else if (mode === 'both') {
+      v1.volume = vol
+      v2.volume = vol
+    } else {
+      v1.volume = 0
+      v2.volume = 0
+    }
+  }, [])
 
   useEffect(() => {
     updateAudio(audioMode, volume)
@@ -337,7 +332,9 @@ export default function VideoCheck() {
     if (!v1 || !v1.duration) return
     if (!isSeekingRef.current) {
       setSeekValue((v1.currentTime / v1.duration) * 100)
-      setTimeDisplay(`${formatTime(v1.currentTime)} / ${formatTime(v1.duration)}`)
+      setTimeDisplay(
+        `${formatTime(v1.currentTime)} / ${formatTime(v1.duration)}`
+      )
       const duration = maxDuration || v1.duration || 1
       setProgress1((v1.currentTime / duration) * 100)
       setPlayheadPct((v1.currentTime / duration) * 100)
@@ -458,7 +455,9 @@ export default function VideoCheck() {
       </Head>
 
       <div className="mx-auto w-full max-w-6xl">
-        <h1 className="text-2xl font-bold text-white mb-8">動画比較プレイヤー</h1>
+        <h1 className="text-2xl font-bold text-white mb-8">
+          動画比較プレイヤー
+        </h1>
 
         <div className="flex flex-wrap items-center gap-3 mb-6 bg-neutral-800/50 border border-neutral-700 rounded-lg p-4">
           <button
@@ -518,10 +517,7 @@ export default function VideoCheck() {
 
           <div className="flex items-center gap-3 text-sm text-neutral-300">
             {(['1', '2', 'both', 'mute'] as AudioMode[]).map((v) => (
-              <label
-                key={v}
-                className="flex items-center gap-1 cursor-pointer"
-              >
+              <label key={v} className="flex items-center gap-1 cursor-pointer">
                 <input
                   type="radio"
                   name="audio"
@@ -575,9 +571,7 @@ export default function VideoCheck() {
             <h2 className="text-base font-semibold text-white">音声波形比較</h2>
             <div className="flex items-center gap-2">
               <button
-                onClick={() =>
-                  setZoomLevel((z) => Math.max(z / 1.5, 0.5))
-                }
+                onClick={() => setZoomLevel((z) => Math.max(z / 1.5, 0.5))}
                 className="px-3 py-1 bg-neutral-700 hover:bg-neutral-600 rounded-md text-white text-sm"
               >
                 −
@@ -612,10 +606,7 @@ export default function VideoCheck() {
               onClick={onWaveformClick}
             >
               <div className="h-5 relative bg-neutral-900 rounded-t">
-                <canvas
-                  ref={timeRulerRef}
-                  className="w-full h-full block"
-                />
+                <canvas ref={timeRulerRef} className="w-full h-full block" />
               </div>
               <div className="flex flex-col gap-1 mt-0.5">
                 {([1, 2] as const).map((n) => (
@@ -652,7 +643,8 @@ export default function VideoCheck() {
           </div>
 
           <p className="text-xs text-neutral-500 mt-2">
-            ヒント: Space で再生/一時停止、←/→ で5秒スキップ、Ctrl+ホイールで波形をズーム
+            ヒント: Space で再生/一時停止、←/→
+            で5秒スキップ、Ctrl+ホイールで波形をズーム
           </p>
         </div>
       </div>

@@ -424,7 +424,7 @@ export default function CompanionConfigGenerate({
 
         controls['0'][col.toString()] = createButton(
           btn.text,
-          ('size' in btn && typeof btn.size === 'string' ? btn.size : '18'),
+          'size' in btn && typeof btn.size === 'string' ? btn.size : '18',
           actions
         )
       })
