@@ -6,7 +6,13 @@ precacheAndRoute(self.__WB_MANIFEST)
 const CACHE_NAME = 'video-cache'
 const VIDEO_URL = [
   // 'https://pub-ac15e822806e471884e2b63b26f353c6.r2.dev/srekaigi2026/makuai.mp4',
-  'https://intermission.dero1to.live/output_compressed.mp4',
+  // 'https://intermission.dero1to.live/output_compressed.mp4',
+  '/phpcon_odawara/info_002.jpg',
+  '/phpcon_odawara/info_003.jpg',
+  '/phpcon_odawara/info_004.jpg',
+  '/phpcon_odawara/info_005.jpg',
+  '/phpcon_odawara/info_006.jpg',
+  '/phpcon_odawara/info_007.jpg',
 ]
 
 async function updateCache() {
